@@ -60,7 +60,7 @@ export default {
   computed: {
     filteredPokemons() {
       return this.pokemons.filter((pokemon) => {
-        return pokemon.name.includes(this.search);
+        return pokemon.name.toLowerCase().includes(this.search.toLowerCase());
       });
     }
   },
