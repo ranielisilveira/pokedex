@@ -1,5 +1,5 @@
 <template>
-  <v-dialog v-model="show" width="800">
+  <v-dialog v-model="show_dialog" width="800">
     <v-card v-if="selected_pokemon" class="px-4">
       <v-container>
         <v-row class="d-flex align-center">
@@ -101,7 +101,7 @@
 <script>
 import MoveMethodImage from "./MoveMethodImage.vue";
 import EvolutionChain from "./EvolutionChain.vue";
-import Stats from "./Stats.vue";
+import Stats from "./PokemonStats.vue";
 import PokemonType from "./PokemonType.vue";
 
 export default {
