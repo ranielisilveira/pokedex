@@ -36,23 +36,24 @@
       </v-container>
     </v-container>
 
-    <PokemonInfoDialog
-      :show.sync="show_dialog"
-      :selected_pokemon="selected_pokemon"
-    />
+    <PokemonInfoDialog :selected_pokemon="selected_pokemon" />
   </v-app>
 </template>
 
 <script>
 import axios from "axios";
+
 import PokemonCard from "./components/PokemonCard.vue";
 import PokemonInfoDialog from "./components/PokemonInfoDialog.vue";
+
 export default {
   name: "App",
+
   components: {
     PokemonCard,
     PokemonInfoDialog,
   },
+
   data() {
     return {
       pokemons: [],
@@ -61,6 +62,7 @@ export default {
       selected_pokemon: null,
     };
   },
+
   mounted() {
     axios
       .get("https://pokeapi.co/api/v2/pokemon?limit=493")
