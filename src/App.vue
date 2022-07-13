@@ -12,7 +12,7 @@
                       :src="`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${getPokemonId(pokemon)}.png`"
                       :alt="pokemon.name" width="80%" />
                   </v-row>
-                  <h2 class="text-center">{{ pokemon.name }}</h2>
+                  <h2 class="text-center">{{ getPokemonName(pokemon) }}</h2>
                 </v-container>
               </v-card>
             </v-col>
@@ -48,6 +48,10 @@ export default {
   methods: {
     getPokemonId(pokemon) {
       return Number(pokemon.url.split('/')[6]);
+    },
+
+    getPokemonName(pokemon) {
+      return pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1);
     }
   }
 
