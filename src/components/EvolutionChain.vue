@@ -1,17 +1,17 @@
 <template>
   <div>
     <v-row class="mx-0 d-flex align-center">
-      <template v-for="(evolutionDetail, index) in evolutions()">
+      <template v-for="(evolution_detail, index) in evolutions()">
         <v-col
           cols="12"
           md="3"
           :key="`evolution-${index}`"
-          v-if="typeof evolutionDetail == 'object'"
+          v-if="typeof evolution_detail == 'object'"
         >
-          <PokemonCard :pokemon="evolutionDetail" flat />
+          <PokemonCard :pokemon="evolution_detail" flat />
         </v-col>
         <v-col md="1" :key="`evolution-${index}`" v-else>
-          <h3 class="text-center">L {{ evolutionDetail }}</h3>
+          <h3 class="text-center">L {{ evolution_detail }}</h3>
         </v-col>
       </template>
     </v-row>
@@ -35,14 +35,14 @@ export default {
     pokemon: Object,
   },
   mounted() {
-    this.fetchEvolution();
+    this.fetch_evolution();
   },
   methods: {
-    fetchEvolution() {
+    fetch_evolution() {
       axios
         .get(`https://pokeapi.co/api/v2/pokemon-species/${this.pokemon.id}`)
         .then((response) => {
-          axios.get(response.data.evolutionChain.url).then((response) => {
+          axios.get(response.data.evolution_chain.url).then((response) => {
             this.evolution = response.data.chain;
           });
         });
@@ -55,14 +55,14 @@ export default {
       }
 
       while (evolution.species) {
-        if (evolution.evolvesTo.length > 0) {
-          evolution = evolution.evolvesTo[0];
+        if (evolution.evolves_to.length > 0) {
+          evolution = evolution.evolves_to[0];
 
           if (
-            evolution.evolutionDetails.length > 0 &&
-            evolution.evolutionDetails[0].minLevel
+            evolution.evolution_details.length > 0 &&
+            evolution.evolution_details[0].min_level
           ) {
-            chain.push(evolution.evolutionDetails[0].minLevel);
+            chain.push(evolution.evolution_details[0].min_level);
           }
 
           if (evolution.species) {
@@ -78,7 +78,7 @@ export default {
   },
   watch: {
     pokemon() {
-      this.fetchEvolution();
+      this.fetch_evolution();
     },
   },
 };
