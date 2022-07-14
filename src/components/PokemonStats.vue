@@ -12,7 +12,7 @@
         style="width: 100%"
         class="d-flex justify-center text-center white--text"
       >
-        {{ transform_name(stat.stat.name) }} {{ stat.base_stat }}
+        {{ transformName(stat.stat.name) }} {{ stat.base_stat }}
       </v-chip>
     </v-col>
   </v-row>
@@ -36,7 +36,7 @@ export default {
     pokemon: Object,
   },
   methods: {
-    transform_name(name) {
+    transformName(name) {
       if (name.includes("-")) {
         let parts = name.split("-");
         return `${parts[0].charAt(0).toUpperCase()} ${parts[1]
