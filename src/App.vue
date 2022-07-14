@@ -36,7 +36,10 @@
       </v-container>
     </v-container>
 
-    <PokemonInfoDialog :selected_pokemon="selected_pokemon" />
+    <PokemonInfoDialog
+      :show.sync="show_dialog"
+      :selected_pokemon="selected_pokemon"
+    />
   </v-app>
 </template>
 
@@ -65,9 +68,10 @@ export default {
 
   mounted() {
     axios
-      .get("https://pokeapi.co/api/v2/pokemon?limit=493")
+      .get("https://pokeapi.co/api/v2/pokemon?limit=500")
       .then((response) => {
-        this.pokemons = response.data.results;
+        let pokemons = response.data.results;
+        this.pokemons = pokemons.sort((a, b) => a.name.localeCompare(b.name));
       });
   },
   methods: {

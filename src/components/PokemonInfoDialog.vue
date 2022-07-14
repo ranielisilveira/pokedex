@@ -1,5 +1,5 @@
 <template>
-  <v-dialog v-model="show_dialog" width="800">
+  <v-dialog v-model="showLocal" width="800">
     <v-card v-if="selected_pokemon" class="px-4">
       <v-container>
         <v-row class="d-flex align-center">
@@ -32,7 +32,7 @@
 
         <h2 class="mt-4">Stats</h2>
 
-        <Stats class="mt-2" :pokemon="selected_pokemon" />
+        <PokemonStats class="mt-2" :pokemon="selected_pokemon" />
 
         <h2 class="mt-6 mb-4">Moves</h2>
 
@@ -101,14 +101,14 @@
 <script>
 import MoveMethodImage from "./MoveMethodImage.vue";
 import EvolutionChain from "./EvolutionChain.vue";
-import Stats from "./PokemonStats.vue";
+import PokemonStats from "./PokemonStats.vue";
 import PokemonType from "./PokemonType.vue";
 
 export default {
   components: {
     MoveMethodImage,
     EvolutionChain,
-    Stats,
+    PokemonStats,
     PokemonType,
   },
   props: {
@@ -128,6 +128,14 @@ export default {
     },
   },
   computed: {
+    showLocal:{
+      get() {
+        return this.show;
+      },
+      set(value) {
+        this.$emit("show", value);
+      }
+    },
     moves() {
       let response = { "level-up": [], egg: [], machine: [], tutor: [] };
       for (let move of this.selected_pokemon.moves) {

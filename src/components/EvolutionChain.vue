@@ -21,6 +21,7 @@
 <script>
 import axios from "axios";
 import PokemonCard from "./PokemonCard.vue";
+
 export default {
   components: {
     PokemonCard,
@@ -52,15 +53,18 @@ export default {
       if (evolution.species) {
         chain.push(evolution.species);
       }
+
       while (evolution.species) {
         if (evolution.evolves_to.length > 0) {
           evolution = evolution.evolves_to[0];
+
           if (
             evolution.evolution_details.length > 0 &&
             evolution.evolution_details[0].min_level
           ) {
             chain.push(evolution.evolution_details[0].min_level);
           }
+
           if (evolution.species) {
             chain.push(evolution.species);
           }
@@ -68,6 +72,7 @@ export default {
           break;
         }
       }
+
       return chain;
     },
   },
