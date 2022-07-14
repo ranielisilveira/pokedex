@@ -11,7 +11,7 @@
             />
           </v-col>
           <v-col cols="12" md="8">
-            <h1>{{ get_name(selected_pokemon) }}</h1>
+            <h1>{{ getName(selected_pokemon) }}</h1>
             <PokemonType
               v-for="type in selected_pokemon.types"
               :key="type.slot"
@@ -116,10 +116,10 @@ export default {
     selected_pokemon: Object,
   },
   methods: {
-    get_name(pokemon) {
+    getName(pokemon) {
       return pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1);
     },
-    transform_move_name(name) {
+    transformMoveName(name) {
       let response = "";
       for (let part of name.split("-")) {
         response += part.charAt(0).toUpperCase() + part.slice(1) + " ";
@@ -128,13 +128,13 @@ export default {
     },
   },
   computed: {
-    showLocal:{
+    showLocal: {
       get() {
         return this.show;
       },
       set(value) {
         this.$emit("show", value);
-      }
+      },
     },
     moves() {
       let response = { "level-up": [], egg: [], machine: [], tutor: [] };
@@ -144,7 +144,7 @@ export default {
             response[details.move_learn_method.name].push({
               level: details.level_learned_at,
               method: details.move_learn_method.name,
-              name: this.transform_move_name(move.move.name),
+              name: this.transformMoveName(move.move.name),
             });
             break;
           }
