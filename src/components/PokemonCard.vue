@@ -1,16 +1,16 @@
 <template>
-  <v-card @click="show_pokemon(get_id(pokemon))" :flat="flat">
+  <v-card @click="showPokemon(getId(pokemon))" :flat="flat">
     <v-container>
       <v-row class="mx-0 d-flex justify-center">
         <img
-          :src="`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${get_id(
+          :src="`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${getId(
             pokemon
           )}.png`"
           :alt="pokemon.name"
           width="80%"
         />
       </v-row>
-      <h2 class="text-center">{{ get_name(pokemon) }}</h2>
+      <h2 class="text-center">{{ getName(pokemon) }}</h2>
     </v-container>
   </v-card>
 </template>
@@ -25,13 +25,13 @@ export default {
     },
   },
   methods: {
-    get_id(pokemon) {
+    getId(pokemon) {
       return Number(pokemon.url.split("/")[6]);
     },
-    get_name(pokemon) {
+    getName(pokemon) {
       return pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1);
     },
-    show_pokemon(id) {
+    showPokemon(id) {
       this.$emit("clicked", id);
     },
   },
